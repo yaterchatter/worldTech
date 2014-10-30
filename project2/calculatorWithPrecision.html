@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculator</title>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.0.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		var memNum;
+		var memOp;
+		var sequence = false;
+		var precision = 2;
+		$("body").ready(init());
+		function init() {
+			memNum = 0;
+			memOp = "";
+		}
+		function setPrecision(input) {
+			precision = input;
+			setScreenVal(screenVal());
+		}
+		function screenVal() {
+			var a = $('#screen').val();
+			if(a == "") {
+				return 0;
+			}
+			else {
+				return parseFloat(a);
+			}
+		}
+		function setScreenVal(value){
+			$('#screen').val(parseFloat(value).toPrecision(precision));
+		}
+		function appendToScreen(id) {
+			setScreenVal($('#screen').val() + $(id).val());
+		}
+		function setMem(operation) {
+			memNum = screenVal();
+			memOp = operation;
+		}
+		function clears() {
+			$('#screen').val('');
+		}
+		function setOp(op) {
+			setMem(op.value);
+			clears();
+			sequence = false;
+		}
+		function equals() {
+			var nowNum = screenVal();
+			switch(memOp) {
+				case "+":
+					setScreenVal( memNum + nowNum); break;
+				case "-":
+					var subVal;
+					if(sequence) {
+						subVal = nowNum - memNum;
+					}
+					else {
+						subVal = memNum - nowNum;
+					}
+					setScreenVal( subVal); break;
+				case "":
+					break;				
+			}
+			if(!sequence) {
+				memNum = nowNum;
+			}
+			sequence = true;
+		}
+	</script>
+</head>
+<body><br>
+	<input type="text" id="screen" value="" /><br>
+	<input type="button" id="b7" onclick="appendToScreen(this);" value="7"/>
+	<input type="button" id="b8" onclick="appendToScreen(this);" value="8"/>
+	<input type="button" id="b9" onclick="appendToScreen(this);" value="9"/><br>
+	<input type="button" id="b4" onclick="appendToScreen(this);" value="4"/>
+	<input type="button" id="b5" onclick="appendToScreen(this);" value="5"/>
+	<input type="button" id="b6" onclick="appendToScreen(this);" value="6"/><br>
+	<input type="button" id="b1" onclick="appendToScreen(this);" value="1"/>
+	<input type="button" id="b2" onclick="appendToScreen(this);" value="2"/>
+	<input type="button" id="b3" onclick="appendToScreen(this);" value="3"/><br>
+	<input type="button" id="b0" onclick="appendToScreen(this);" value="0"/>
+	<input type="button" id="dot" onclick="appendToScreen(this);" value="."/><br>
+	<input type="button" id="plus" onclick="setOp(this);" value="+" />
+	<input type="button" id="minus" onclick="setOp(this);" value="-" />
+	<input type="button" id="equals" onclick="equals();" value="=" /><br>
+	<input type="button" id="clear" onclick="clears();" value="Clear" />
+	<input type="button" id="clear" onclick="clears(); init();" value="Reset" /> <br>
+	<input type="number" id="precisionVal" value="2" />
+	<input type="button" id="precisionSubmit" onclick="setPrecision($('#precisionVal').val())" value="Set"
+</body>
+</html>
