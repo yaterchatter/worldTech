@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+
+	//state  is 0,1,2 where 0 is blank, 1 is x, 2 is o
+	function button() {
+		this.state = 0;
+		this.set = false;
+		this.click = function (buttonI){
+			if(!this.set) {
+				//set any element that has a value (except the current)
+				setElements(buttonI);
+				if(this.state < 2) {
+					this.state++
+				} 
+				else {
+					this.state = 0;
+				}
+				document.getElementById(buttonI).innerHTML = this.state;
+			}
+		};
+
+	}
+	
+	var buttons = [];
+	for (var i = 0; i < 9; i++) {
+		buttons.push(new button());
+	};
+
+	function setElements(buttonI) {
+		for (var i = 0; i < buttons.length; i++) {
+			if(i != parseInt(buttonI) & !buttons[i].set && buttons[i].state > 0) {
+				buttons[i].set = true;
+			}
+		};
+	}
+	</script>
+	<button id="0" onclick="buttons[0].click('0')" class="button">0</button>
+	<button id="1" onclick="buttons[1].click('1')" class="button">0</button>
+	<button id="2" onclick="buttons[2].click('2')" class="button">0</button><br>
+	<button id="3" onclick="buttons[3].click('3')" class="button">0</button>
+	<button id="4" onclick="buttons[4].click('4')" class="button">0</button>
+	<button id="5" onclick="buttons[5].click('5')" class="button">0</button><br>
+	<button id="6" onclick="buttons[6].click('6')" class="button">0</button>
+	<button id="7" onclick="buttons[7].click('7')" class="button">0</button>
+	<button id="8" onclick="buttons[8].click('8')" class="button">0</button>
+</body>
+</html>

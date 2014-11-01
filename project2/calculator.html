@@ -76,7 +76,7 @@
 	</script>
 </head>
 <body><br>
-	<input type="text" id="screen" value="" /><br>
+	<input type="text" id="screen" value="" onkeyup="this.value=this.value.replace(/[^\d]/,'')"/><br>
 	<input type="button" id="b7" onclick="appendToScreen(this);" value="7"/>
 	<input type="button" id="b8" onclick="appendToScreen(this);" value="8"/>
 	<input type="button" id="b9" onclick="appendToScreen(this);" value="9"/><br>
@@ -90,7 +90,7 @@
 	<input type="button" id="dot" onclick="appendToScreen(this);" value="."/><br>
 	<input type="button" id="plus" onclick="setOp(this);" value="+" />
 	<input type="button" id="minus" onclick="setOp(this);" value="-" /><br>
-		<input type="button" id="multiply" onclick="setOp(this);" value="*" />
+	<input type="button" id="multiply" onclick="setOp(this);" value="*" />
 	<input type="button" id="divide" onclick="setOp(this);" value="/" />
 	<input type="button" id="equals" onclick="equals();" value="=" /><br>
 	<input type="button" id="clear" onclick="clears();" value="Clear" />
