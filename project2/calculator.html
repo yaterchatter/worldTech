@@ -7,7 +7,9 @@
 		var memNum;
 		var memOp;
 		var sequence = false;
+
 		$("body").ready(init());
+
 		function init() {
 			memNum = 0;
 			memOp = "";
@@ -22,24 +24,30 @@
 				return parseFloat(a);
 			}
 		}
+
 		function setScreenVal(value){
 			$('#screen').val(value);
 		}
+
 		function appendToScreen(id) {
 			$('#screen').val($('#screen').val() + $(id).val());
 		}
+
 		function setMem(operation) {
 			memNum = screenVal();
 			memOp = operation;
 		}
+
 		function clears() {
 			$('#screen').val('');
 		}
+
 		function setOp(op) {
 			setMem(op.value);
 			clears();
 			sequence = false;
 		}
+
 		function equals() {
 			var nowNum = screenVal();
 			switch(memOp) {
@@ -74,26 +82,51 @@
 			sequence = true;
 		}
 	</script>
+	<style type="text/css">
+		.background {
+			width:270px;
+			height:500px;
+			background-color: gray;
+		}
+		.button {
+			width: 50px;
+			height: 50px;
+			margin: 5px;
+		}
+		.screen {
+			height: 30px;
+			width: 240px;
+			margin: 10px;
+		}
+	</style>
 </head>
 <body><br>
-	<input type="text" id="screen" value="" onkeyup="this.value=this.value.replace(/[^\d]/,'')"/><br>
-	<input type="button" id="b7" onclick="appendToScreen(this);" value="7"/>
-	<input type="button" id="b8" onclick="appendToScreen(this);" value="8"/>
-	<input type="button" id="b9" onclick="appendToScreen(this);" value="9"/><br>
-	<input type="button" id="b4" onclick="appendToScreen(this);" value="4"/>
-	<input type="button" id="b5" onclick="appendToScreen(this);" value="5"/>
-	<input type="button" id="b6" onclick="appendToScreen(this);" value="6"/><br>
-	<input type="button" id="b1" onclick="appendToScreen(this);" value="1"/>
-	<input type="button" id="b2" onclick="appendToScreen(this);" value="2"/>
-	<input type="button" id="b3" onclick="appendToScreen(this);" value="3"/><br>
-	<input type="button" id="b0" onclick="appendToScreen(this);" value="0"/>
-	<input type="button" id="dot" onclick="appendToScreen(this);" value="."/><br>
-	<input type="button" id="plus" onclick="setOp(this);" value="+" />
-	<input type="button" id="minus" onclick="setOp(this);" value="-" /><br>
-	<input type="button" id="multiply" onclick="setOp(this);" value="*" />
-	<input type="button" id="divide" onclick="setOp(this);" value="/" />
-	<input type="button" id="equals" onclick="equals();" value="=" /><br>
-	<input type="button" id="clear" onclick="clears();" value="Clear" />
-	<input type="button" id="clear" onclick="clears(); init();" value="Reset" />
+	<div class="background" >
+		<input type="text" id="screen" class="screen" value="" onkeyup="this.value=this.value.replace(/[^\d]/,'')"/><br>
+		<input type="button" id="b7" class="button" onclick="appendToScreen(this);" value="7"/>
+		<input type="button" id="b8" class="button" onclick="appendToScreen(this);" value="8"/>
+		<input type="button" id="b9" class="button" onclick="appendToScreen(this);" value="9"/>
+		<input type="button" id="plus" class="button" onclick="setOp(this);" value="+" /><br>
+		<input type="button" id="b4" class="button" onclick="appendToScreen(this);" value="4"/>
+		<input type="button" id="b5" class="button" onclick="appendToScreen(this);" value="5"/>
+		<input type="button" id="b6" class="button" onclick="appendToScreen(this);" value="6"/>
+		<input type="button" id="minus" class="button" onclick="setOp(this);" value="-" /><br>
+		<input type="button" id="b1" class="button" onclick="appendToScreen(this);" value="1"/>
+		<input type="button" id="b2" class="button" onclick="appendToScreen(this);" value="2"/>
+		<input type="button" id="b3" class="button" onclick="appendToScreen(this);" value="3"/>
+		<input type="button" id="multiply" class="button" onclick="setOp(this);" value="*" /><br>
+		<input type="button" id="b0" class="button" onclick="appendToScreen(this);" value="0"/>
+		<input type="button" id="dot" class="button" onclick="appendToScreen(this);" value="."/>
+		<input type="button" id="equals" class="button" onclick="equals();" value="=" />
+		<input type="button" id="divide" class="button" onclick="setOp(this);" value="/" /><br>
+
+
+		<br>
+		
+		
+		
+		<input type="button" id="clear" class="button" onclick="clears();" value="Clear" />
+		<input type="button" id="clear" class="button" onclick="clears(); init();" value="Reset" />
+	</div>
 </body>
 </html>
