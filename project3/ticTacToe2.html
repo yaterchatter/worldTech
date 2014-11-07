@@ -34,6 +34,7 @@
 </style>
 	<script type="text/javascript">
 	var turn = true;
+	var done = false;
 	function getXO(){
 
 		if(turn) {
@@ -46,10 +47,10 @@
 		}
 	}
 	function processClick(el) {
-		if(el.innerHTML.length == 0){
+		if(el.innerHTML.length == 0 && !done){
 			el.innerHTML = getXO();
+			checkWin();
 		}
-		checkWin();
 	}
 
 	function reset() {
@@ -58,12 +59,14 @@
 			elems[i].innerHTML = ""
 		}
 		turn = true;
+		done = false;
 	}
 
 	function logicCheck(a,b,c) {
-		var c = document.getElementById("container").children;
-		if((c[a].length > 0) && (c[a].innerHTML == c[b].innerHTML) && (c[b].innerHTML == c[c].innerHTML)){
-			alert(c[a].innerHTML + " wins!")
+		var e = document.getElementById("container").children;
+		if((e[a].innerHTML.length > 0) && (e[a].innerHTML == e[b].innerHTML) && (e[b].innerHTML == e[c].innerHTML)){
+			alert(e[a].innerHTML + " wins!");
+			done = true;
 		};
 	}
 
