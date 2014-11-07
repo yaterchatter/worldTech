@@ -5,18 +5,35 @@
 </head>
 <body>
 <style type="text/css">
+	html,body{
+		height:90%;
+	}
+	#container {
+		width:330px	;
+		height:300px;
+		padding-left:5px;
+	}
 	.button {
-		width:50px;
-		height:50px;
-		margin:5px;
-		padding:5px;
+		float:left;
+		width:100px;
+		height:100px;
 		background-color:gray;
-		display:inline-block;
+		border:solid;
+		border-color:white;
+		text-align:center;
+		line-height: 100px;
+		color:white;
+		font-size:40px;
+
+	}
+	#reset {
+		display:block;
+		margin-left:8px;
 	}
 
 </style>
 	<script type="text/javascript">
-	var turn = false;
+	var turn = true;
 	function getXO(){
 
 		if(turn) {
@@ -32,18 +49,62 @@
 		if(el.innerHTML.length == 0){
 			el.innerHTML = getXO();
 		}
+		checkWin();
+	}
+
+	function reset() {
+		var elems = document.getElementById("container").children;
+		for(var i = 0; i < elems.length; i++) {
+			elems[i].innerHTML = ""
+		}
+		turn = true;
+	}
+
+	function logicCheck(a,b,c) {
+		var c = document.getElementById("container").children;
+		if((c[a].length > 0) && (c[a].innerHTML == c[b].innerHTML) && (c[b].innerHTML == c[c].innerHTML)){
+			alert(c[a].innerHTML + " wins!")
+		};
+	}
+
+	function checkWin() {
+		
+		//horizontal
+		//012
+		logicCheck(0,1,2);
+		//345
+		logicCheck(3,4,5);
+		//678
+		logicCheck(6,7,8);
+
+		//vertical
+		//036
+		logicCheck(0,3,6);
+		//147
+		logicCheck(1,4,7);
+		//258
+		logicCheck(2,5,8);
+
+		//diagonals
+		//048
+		logicCheck(0,4,8);
+		//246
+		logicCheck(2,4,6);
 	}
 
 	</script>
-
-	<div id="1" onclick="processClick(this)" class="button"></div>
-	<div id="1" onclick="processClick(this)" class="button"></div>
-	<div id="2" onclick="processClick(this)" class="button"></div><br>
-	<div id="3" onclick="processClick(this)" class="button"></div>
-	<div id="4" onclick="processClick(this)" class="button"></div>
-	<div id="5" onclick="processClick(this)" class="button"></div><br>
-	<div id="6" onclick="processClick(this)" class="button"></div>
-	<div id="7" onclick="processClick(this)" class="button"></div>
-	<div id="8" onclick="processClick(this)" class="button"></div>
+	<div id="container" >
+		<div id="0" onclick="processClick(this)" class="button"></div>
+		<div id="1" onclick="processClick(this)" class="button"></div>
+		<div id="2" onclick="processClick(this)" class="button"></div>
+		<div id="3" onclick="processClick(this)" class="button"></div>
+		<div id="4" onclick="processClick(this)" class="button"></div>
+		<div id="5" onclick="processClick(this)" class="button"></div>
+		<div id="6" onclick="processClick(this)" class="button"></div>
+		<div id="7" onclick="processClick(this)" class="button"></div>
+		<div id="8" onclick="processClick(this)" class="button"></div>
+	</div>
+	<br>
+	<input type="button" id="reset" onclick="reset()" value="Reset"/>
 </body>
 </html>
