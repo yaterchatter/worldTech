@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+        @font-face {
+			font-family: starTrek;
+			src: url(../project1/fonts/Roddenberry.ttf);
+		}
+        body {
+            background-color: black;
+        }
+	    #buttonArea{
+            text-align:center;
+            margin-top:10px;
+	    }
+        #picBox {
+            text-align:center;
+            height: 310px;
+            overflow:hidden;
+        }
+        .pic {
+            height: 300px;
+            position: relative;
+            right: 10px;
+            margin:10px;
+        }
+        button:focus{outline:0}
+        button {
+            font-family: starTrek;
+			text-decoration:none;
+			color: white;
+            border: 0; 
+            background: transparent;
+            font-size:24px;
+            
+        }
+	</style>
+	<script type="text/javascript" src="../lib/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript">
+		var imgs = ["../img/picard.jpg","../img/data.jpg","../img/riker.jpg"];
+		var i = 0;
+		$(document).ready(function () {
+		    loadImgs();
+		    $("#next").click(nextImg);
+		    $("#prev").click(prevImg);
+		    $("#picBox").bind("mousewheel", function (e) {
+		        if ($(".pic").first().is(':animated')) return;
+		        if (e.originalEvent.wheelDelta / 120 > 0) {
+		            prevImg();
+		        }
+		        else {
+		            nextImg();
+		        }
+		    })
+		});
+		function loadImgs() {
+		    $.each(imgs, function (i, value) {
+		        $("#picBox").append("<img id='image' class='pic' src='"+value+"'>");
+		    });
+
+		}
+		function prevImg() {
+		    $(".pic").animate({
+		        right: "-=250"
+		    }, 500);
+		}
+		function nextImg() {
+		    //nextI();
+            /*
+		    $(".pic").fadeOut()
+		    .attr("src", imgs[i])
+		    .fadeIn("slow", "swing");
+            */
+		    //fade out and in
+            /*
+		    $(".pic").fadeOut("slow", "swing", function () {
+		        $(".pic").load(function () {
+		            $(".pic").fadeIn("slow", "swing");
+		        }).attr("src", imgs[i]);   
+		        
+		    })
+            */
+		    $(".pic").animate({
+		        right: "+=250"
+		    }, 500);
+            
+		}
+        /*
+		function nextI() {
+			if(i < imgs.length-1) {
+				i++;
+			}
+			else {
+				i=0;
+			}
+		}
+        */
+		function animate() {
+			$(".pic").animate({
+			    right: "+=65"
+			},500);
+		}
+	</script>
+</head>
+<body>
+    <div id="picBox">
+        
+    </div>
+	<div id="buttonArea">
+        <button id="prev">Prev</button>
+		<button id="next">Next</button>
+	</div>
+</body>
+</html>
